@@ -7,6 +7,10 @@ matrix:
       dist: 1803-containers
       env: VERSION=3.8 VARIANT=windows/windowsservercore-1803
     - os: linux
+      env: VERSION=3.8 VARIANT=ubuntu-bionic
+    - os: linux
+      env: VERSION=3.8 VARIANT=ubuntu-xenial
+    - os: linux
       env: VERSION=3.8 VARIANT=buster
     - os: linux
       env: VERSION=3.8 VARIANT=buster/slim
@@ -15,6 +19,10 @@ matrix:
     - os: windows
       dist: 1803-containers
       env: VERSION=3.7 VARIANT=windows/windowsservercore-1803
+    - os: linux
+      env: VERSION=3.7 VARIANT=ubuntu-bionic
+    - os: linux
+      env: VERSION=3.7 VARIANT=ubuntu-xenial
     - os: linux
       env: VERSION=3.7 VARIANT=buster
     - os: linux

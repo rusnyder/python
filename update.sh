@@ -118,6 +118,7 @@ for version in "${versions[@]}"; do
 	for v in \
 		alpine{3.9,3.10} \
 		{stretch,buster}{/slim,} \
+		ubuntu-{xenial,bionic} \
 		windows/windowsservercore-{1809,1803,ltsc2016} \
 	; do
 		dir="$version/$v"
@@ -129,6 +130,7 @@ for version in "${versions[@]}"; do
 			slim) template="$variant"; tag="$(basename "$(dirname "$dir")")" ;;
 			windowsservercore-*) template='windowsservercore'; tag="${variant#*-}" ;;
 			alpine*) template='alpine'; tag="${variant#alpine}" ;;
+			ubuntu*) template='ubuntu'; tag="${variant#ubuntu-}" ;;
 			*) template='debian'; tag="$variant" ;;
 		esac
 		if [ "$variant" = 'slim' ]; then
@@ -150,7 +152,7 @@ for version in "${versions[@]}"; do
 			-e 's!^(ENV PYTHON_GET_PIP_URL) .*!\1 '"$getPipUrl"'!' \
 			-e 's!^(ENV PYTHON_GET_PIP_SHA256) .*!\1 '"$getPipSha256"'!' \
 			-e 's/^(FROM python):.*/\1:'"$version-$tag"'/' \
-			-e 's!^(FROM (debian|buildpack-deps|alpine|mcr[.]microsoft[.]com/[^:]+)):.*!\1:'"$tag"'!' \
+			-e 's!^(FROM (debian|buildpack-deps|alpine|ubuntu|mcr[.]microsoft[.]com/[^:]+)):.*!\1:'"$tag"'!' \
 			"$dir/Dockerfile"
 
 		case "$rcVersion/$v" in
